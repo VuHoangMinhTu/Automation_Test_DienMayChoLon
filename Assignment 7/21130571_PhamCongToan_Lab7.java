@@ -2,106 +2,124 @@
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
-import static org.junit.Assert.*;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNot.not;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.Keys;
+
 import java.util.*;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 public class DefaultSuiteTest {
-  private WebDriver driver;
-  private Map<String, Object> vars;
-  JavascriptExecutor js;
-  @Before
-  public void setUp() {
-    driver = new FirefoxDriver();
-    js = (JavascriptExecutor) driver;
-    vars = new HashMap<String, Object>();
-  }
-  @After
-  public void tearDown() {
-    driver.quit();
-  }
-  public String waitForWindow(int timeout) {
-    try {
-      Thread.sleep(timeout);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+    private WebDriver driver;
+    private Map<String, Object> vars;
+    JavascriptExecutor js;
+
+    @Before
+    public void setUp() {
+        driver = new FirefoxDriver();
+        js = (JavascriptExecutor) driver;
+        vars = new HashMap<String, Object>();
     }
-    Set<String> whNow = driver.getWindowHandles();
-    Set<String> whThen = (Set<String>) vars.get("window_handles");
-    if (whNow.size() > whThen.size()) {
-      whNow.removeAll(whThen);
+
+    @After
+    public void tearDown() {
+        driver.quit();
     }
-    return whNow.iterator().next();
-  }
-  @Test
-  public void productInfo() {
-    driver.get("https://dienmaycholon.com/");
-    driver.manage().window().setSize(new Dimension(1836, 948));
-    driver.findElement(By.cssSelector(".owl-item:nth-child(2) > .product_main_so_suat > .product:nth-child(1) .name_pro span")).click();
-    driver.findElement(By.cssSelector("#sync3 .owl-next")).click();
-    driver.findElement(By.cssSelector("#sync3 .owl-next")).click();
-    driver.findElement(By.cssSelector(".fa-cube")).click();
-    driver.findElement(By.cssSelector(".tab-item")).click();
-    driver.findElement(By.cssSelector(".info_pro-title li:nth-child(2)")).click();
-    driver.findElement(By.cssSelector(".info_pro-title li:nth-child(4)")).click();
-    driver.findElement(By.cssSelector(".btn-closemenu")).click();
-    driver.findElement(By.cssSelector("#slide_pro .owl-next")).click();
-    driver.findElement(By.cssSelector(".owl-item:nth-child(3) .name_pro > .name_pro > span")).click();
-    js.executeScript("window.scrollTo(0,1672)");
-    driver.findElement(By.cssSelector(".info_pro-title li:nth-child(3)")).click();
-    driver.findElement(By.cssSelector(".info_pro-title li:nth-child(4)")).click();
-    vars.put("window_handles", driver.getWindowHandles());
-    driver.findElement(By.cssSelector(".comment-btn__item > span")).click();
-    vars.put("win5543", waitForWindow(2000));
-    driver.switchTo().window(vars.get("win5543").toString());
-    js.executeScript("window.scrollTo(0,137)");
-    js.executeScript("window.scrollTo(0,510)");
-    {
-      WebElement element = driver.findElement(By.cssSelector("html"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).clickAndHold().perform();
+
+    // Dùng cho các pop-up window
+    public String waitForWindow(int timeout) {
+        try {
+            Thread.sleep(timeout);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Set<String> whNow = driver.getWindowHandles();
+        Set<String> whThen = (Set<String>) vars.get("window_handles");
+        if (whNow.size() > whThen.size()) {
+            whNow.removeAll(whThen);
+        }
+        return whNow.iterator().next();
     }
-    {
-      WebElement element = driver.findElement(By.cssSelector("html"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).perform();
+
+    // Hàm click kèm delay sau mỗi thao tác
+    private void clickWithDelay(By locator, int delayMs) {
+        driver.findElement(locator).click();
+        try {
+            Thread.sleep(delayMs);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
-    {
-      WebElement element = driver.findElement(By.cssSelector("html"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).release().perform();
+
+    @Test
+    public void productInfo() {
+        driver.get("https://dienmaycholon.com/");
+        driver.manage().window().setSize(new Dimension(1836, 948));
+
+        clickWithDelay(By.cssSelector(".owl-item:nth-child(2) > .product_main_so_suat > .product:nth-child(1) .name_pro span"), 1000);
+        clickWithDelay(By.cssSelector("#sync3 .owl-next"), 1000);
+        clickWithDelay(By.cssSelector("#sync3 .owl-next"), 1000);
+        clickWithDelay(By.cssSelector(".fa-cube"), 1000);
+        clickWithDelay(By.cssSelector(".tab-item"), 1000);
+        clickWithDelay(By.cssSelector(".info_pro-title li:nth-child(2)"), 1000);
+        clickWithDelay(By.cssSelector(".info_pro-title li:nth-child(4)"), 1000);
+        clickWithDelay(By.cssSelector(".btn-closemenu"), 1000);
+        clickWithDelay(By.cssSelector("#slide_pro .owl-next"), 1000);
+        clickWithDelay(By.cssSelector(".owl-item:nth-child(3) .name_pro > .name_pro > span"), 1000);
+
+        js.executeScript("window.scrollTo(0,1672)");
+        clickWithDelay(By.cssSelector(".info_pro-title li:nth-child(3)"), 1000);
+        clickWithDelay(By.cssSelector(".info_pro-title li:nth-child(4)"), 1000);
+
+        vars.put("window_handles", driver.getWindowHandles());
+        clickWithDelay(By.cssSelector(".comment-btn__item > span"), 1000);
+
+        vars.put("win5543", waitForWindow(2000));
+        driver.switchTo().window(vars.get("win5543").toString());
+
+        js.executeScript("window.scrollTo(0,137)");
+        js.executeScript("window.scrollTo(0,510)");
+
+        {
+            WebElement element = driver.findElement(By.cssSelector("html"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).clickAndHold().perform();
+        }
+        {
+            WebElement element = driver.findElement(By.cssSelector("html"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        {
+            WebElement element = driver.findElement(By.cssSelector("html"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).release().perform();
+        }
     }
-  }
-  @Test
-  public void cart() {
-    driver.get("https://dienmaycholon.com/");
-    driver.manage().window().setSize(new Dimension(1836, 948));
-    driver.findElement(By.cssSelector(".owl-item:nth-child(2) > .product_main_so_suat > .product:nth-child(1) strong")).click();
-    driver.findElement(By.cssSelector(".click_buy")).click();
-    driver.findElement(By.linkText("Quay lại mua thêm sản phẩm khác")).click();
-    driver.findElement(By.cssSelector(".owl-item:nth-child(3) > .product_main_so_suat > .product:nth-child(1) .name_pro strong")).click();
-    js.executeScript("window.scrollTo(0,294)");
-    driver.findElement(By.cssSelector(".click_buy")).click();
-    js.executeScript("window.scrollTo(0,78)");
-    driver.findElement(By.cssSelector("div:nth-child(3) > .info_pro-cart .icon_trash")).click();
-    driver.findElement(By.cssSelector(".icon_trash")).click();
-    driver.findElement(By.cssSelector(".logo .lazy")).click();
-    driver.findElement(By.cssSelector(".box_cart_new > span")).click();
-  }
+
+    @Test
+    public void cart() {
+        driver.get("https://dienmaycholon.com/");
+        driver.manage().window().setSize(new Dimension(1836, 948));
+
+        clickWithDelay(By.cssSelector(".owl-item:nth-child(2) > .product_main_so_suat > .product:nth-child(1) strong"), 1000);
+        clickWithDelay(By.cssSelector(".click_buy"), 1000);
+        clickWithDelay(By.linkText("Quay lại mua thêm sản phẩm khác"), 1000);
+        clickWithDelay(By.cssSelector(".owl-item:nth-child(3) > .product_main_so_suat > .product:nth-child(1) .name_pro strong"), 1000);
+
+        js.executeScript("window.scrollTo(0,294)");
+        clickWithDelay(By.cssSelector(".click_buy"), 1000);
+
+        js.executeScript("window.scrollTo(0,78)");
+        clickWithDelay(By.cssSelector("div:nth-child(3) > .info_pro-cart .icon_trash"), 1000);
+        clickWithDelay(By.cssSelector(".icon_trash"), 1000);
+        clickWithDelay(By.cssSelector(".logo .lazy"), 1000);
+        clickWithDelay(By.cssSelector(".box_cart_new > span"), 1000);
+    }
 }
