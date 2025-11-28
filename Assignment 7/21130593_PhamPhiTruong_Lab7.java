@@ -167,8 +167,8 @@ public class Module2UDSPSuitTest {
       WebDriverWait wait = new WebDriverWait(driver, 30);
       wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".product:nth-child(1) .img_pro")));
     }
-    vars.put("result", js.executeScript("var items = document.querySelectorAll(\'.product .name_pro\');  var hasIphone = false;   items.forEach(i => {          let t = i.innerText.toLowerCase().trim();          if (t.includes(\'iphone\')) hasIphone = true;  });    return hasIphone ? \'\' : \'OK\';"));
-    assertEquals(vars.get("result").toString(), "\'\'");
+    vars.put("result", js.executeScript("var items = document.querySelectorAll(\'.product .name_pro\');  var hasIphone = false;   items.forEach(i => {          let t = i.innerText.toLowerCase().trim();          if (t.includes(\'iphone\')) hasIphone = true;  });    return hasIphone ? true : false;"));
+    assertEquals(vars.get("result").toString(), "true");
   }
   @Test
   public void tCSP2() {
@@ -177,8 +177,8 @@ public class Module2UDSPSuitTest {
     driver.findElement(By.cssSelector("input")).click();
     driver.findElement(By.cssSelector("input")).sendKeys("laptop");
     driver.findElement(By.cssSelector(".button_search > svg")).click();
-    vars.put("count", js.executeScript("var items = document.querySelectorAll(\'.product .name_pro\'); return items.length === 0 ? \'\' : \'has items\';"));
-    assertEquals(vars.get("count").toString(), "\'\'");
+    vars.put("count", js.executeScript("var items = document.querySelectorAll(\'.product .name_pro\'); return items.length === 0 ? true : false;"));
+    assertEquals(vars.get("count").toString(), "true");
   }
   @Test
   public void tCSP3() {
@@ -187,7 +187,7 @@ public class Module2UDSPSuitTest {
     driver.findElement(By.cssSelector("input")).click();
     driver.findElement(By.cssSelector("input")).sendKeys("!@###$@^^$@#$$#%^");
     driver.findElement(By.cssSelector(".button_search > svg")).click();
-    vars.put("count", js.executeScript("var items = document.querySelectorAll(\'.product .name_pro\'); return items.length === 0 ? \'\' : \'has items\';"));
-    assertEquals(vars.get("count").toString(), "\'\'");
+    vars.put("count", js.executeScript("var items = document.querySelectorAll(\'.product .name_pro\'); return items.length === 0 ? true : false;"));
+    assertEquals(vars.get("count").toString(), "true");
   }
 }
