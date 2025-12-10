@@ -1,12 +1,16 @@
+package TestPack;
 
-import org.junit.*;
-import static org.junit.Assert.*;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-import java.util.*;
 
-public class Module3TestSuite {
+import static org.junit.jupiter.api.Assertions.*;
+
+public class LeThanhTam_21130526_Lab8 {
     private static WebDriver driver;
     private static JavascriptExecutor js;
     private boolean acceptNextAlert = true;

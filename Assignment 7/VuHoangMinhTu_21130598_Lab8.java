@@ -1,18 +1,21 @@
-import org.junit.Test;
-import org.junit.Before;
+package TestPack;
+
 import org.junit.After;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.IsNot.not;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.JavascriptExecutor;
-import java.util.*;
 
-public class DienMayChoLonTestSuite {
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+
+public class VuHoangMinhTu_21130598_Lab8 {
     private WebDriver driver;
     private Map<String, Object> vars;
     JavascriptExecutor js;
@@ -33,7 +36,7 @@ public class DienMayChoLonTestSuite {
 
     // --- TEST CASE 1: Đăng nhập với tài khoản, mật khẩu đúng ---
     @Test
-    public void loginSuccess() throws InterruptedException {
+    public void test_01_a_loginSuccess() throws InterruptedException {
         driver.get("https://dienmaycholon.com/");
         driver.manage().window().setSize(new Dimension(1552, 840));
         
@@ -51,9 +54,30 @@ public class DienMayChoLonTestSuite {
         assertEquals(vars.get("current_url").toString(), "https://dienmaycholon.com/");
     }
 
+    // --- TEST CASE 4: Đăng xuất tài khoản ---
+    @Test
+    public void test_01_a_logout() throws InterruptedException {
+        driver.get("https://dienmaycholon.com/");
+        driver.manage().window().setSize(new Dimension(1552, 840));
+
+        // Click mở popup đăng nhập
+        js.executeScript("document.querySelector(\"#user_box .icon_login\").click()");
+
+        driver.findElement(By.name("username")).sendKeys("21130598@st.hcmuaf.edu.vn");
+        driver.findElement(By.id("password")).sendKeys("Minhtu2003");
+        driver.findElement(By.name("username")).click();
+        driver.findElement(By.cssSelector(".btn_register > span")).click();
+        Thread.sleep(2000);
+        // Click nút đăng xuất bằng JS
+        js.executeScript("document.querySelector(\".logout > span\").click()");
+
+        Thread.sleep(2000);
+    }
+
+
     // --- TEST CASE 2: Đăng nhập với thông tin tài khoản không đúng định dạng email hoặc số điện thoại ---
     @Test
-    public void loginWithInvalidEmailOrPhoneNumber() throws InterruptedException {
+    public void test_03_loginWithInvalidEmailOrPhoneNumber() throws InterruptedException {
         driver.get("https://dienmaycholon.com/");
         driver.manage().window().setSize(new Dimension(1552, 840));
         
@@ -72,37 +96,26 @@ public class DienMayChoLonTestSuite {
 
     // --- TEST CASE 3: Đăng nhập với tài khoản đúng ,mật khẩu sai ---
     @Test
-    public void loginWithWrongPassword() throws InterruptedException {
+    public void test_04_loginWithWrongPassword() throws InterruptedException {
         driver.get("https://dienmaycholon.com/");
         driver.manage().window().setSize(new Dimension(1552, 840));
-        
+
         js.executeScript("document.querySelector(\"#user_box .icon_login\").click()");
-        
+
         driver.findElement(By.name("username")).sendKeys("21130598@st.hcmuaf.edu.vn");
         driver.findElement(By.id("password")).sendKeys("Minhtu2003");
         driver.findElement(By.name("username")).click();
         driver.findElement(By.cssSelector(".datacustomer")).click();
         driver.findElement(By.id("password")).sendKeys("sdasdasdsada"); // Mật khẩu sai
         driver.findElement(By.cssSelector(".btn_register")).click();
-        
+
         Thread.sleep(2000); // Chờ xem kết quả
     }
 
-    // --- TEST CASE 4: Đăng xuất tài khoản ---
-    @Test
-    public void logout() throws InterruptedException {
-        driver.get("https://dienmaycholon.com/");
-        driver.manage().window().setSize(new Dimension(1552, 840));
-        
-        // Click nút đăng xuất bằng JS
-        js.executeScript("document.querySelector(\".logout > span\").click()");
-        
-        Thread.sleep(2000);
-    }
 
     // --- TEST CASE 5: Đăng ký tài khoản với các trường nhập chính xác thông tin ---
     @Test
-    public void registerSuccess() throws InterruptedException {
+    public void test_02_registerSuccess() throws InterruptedException {
         driver.get("https://dienmaycholon.com/");
         driver.manage().window().setSize(new Dimension(1552, 840));
         
@@ -153,7 +166,7 @@ public class DienMayChoLonTestSuite {
 
     // --- TEST CASE 6: Đăng ký tài khoản với tài khoản sai định dạng email hoặc số điện thoại ---
     @Test
-    public void registerWithInvalidEmail() throws InterruptedException {
+    public void test_06_registerWithInvalidEmail() throws InterruptedException {
         driver.get("https://dienmaycholon.com/");
         driver.manage().window().setSize(new Dimension(1552, 840));
         

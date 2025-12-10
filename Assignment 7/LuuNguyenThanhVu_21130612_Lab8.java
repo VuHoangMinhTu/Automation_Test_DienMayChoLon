@@ -1,22 +1,17 @@
+package TestPack;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
-import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LuuNguyenThanhVu_21130612_Lab7 {
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+
+public class LuuNguyenThanhVu_21130612_Lab8 {
 
   // WebDriver instance for interacting with the browser
   private WebDriver driver;
@@ -34,24 +29,36 @@ public class LuuNguyenThanhVu_21130612_Lab7 {
   // Setup method runs before each test
   //-----------------------------------------
   @BeforeEach
-  public void setUp() throws InterruptedException {
+  public void setUp() {
     WebDriverManager.chromedriver().setup();
     driver = new ChromeDriver();
-    js = (JavascriptExecutor) driver;
+    js = (JavascriptExecutor) driver; // Khởi tạo JS Executor
     vars = new HashMap<String, Object>();
 
-    wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    driver.get("https://dienmaycholon.com/");
+    // Tăng thời gian chờ lên 15s cho chắc ăn
+    wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-    driver.manage().window().setSize(new Dimension(1552, 840));
-    driver.findElement(
-            By.cssSelector(".owl-item:nth-child(1) .product:nth-child(2) .\\36 8-KM-ICON > .lazy"))
-        .click();
+    // 1. Vào trang sản phẩm
+    driver.get("https://dienmaycholon.com/tivi/smart-tivi-lg-ai-4k-75-inch-75ua8450psa");
+    driver.manage().window().maximize();
 
-    Thread.sleep(1000);
-    
-    js.executeScript("window.scrollTo(0,316)");
-    driver.findElement(By.cssSelector(".click_buy")).click();
+    try {
+      // 2. Tìm nút mua hàng (Dùng XPath chính xác nhất)
+      WebElement buyBtn = wait.until(ExpectedConditions.presenceOfElementLocated(
+              By.xpath("//button[contains(@class, 'click_buy')]")
+      ));
+
+      // 3. Scroll xuống chỗ nút đó (đề phòng nút nằm dưới cùng màn hình)
+      js.executeScript("arguments[0].scrollIntoView(true);", buyBtn);
+      Thread.sleep(1000); // Nghỉ 1 xíu cho màn hình cuộn xong
+
+      // 4. "CHIÊU CUỐI": Dùng Javascript để Click (Bất chấp popup che)
+      js.executeScript("arguments[0].click();", buyBtn);
+
+    } catch (Exception e) {
+      System.out.println("Lỗi: Vẫn không click được. Hãy kiểm tra lại link hoặc mạng.");
+      e.printStackTrace(); // In lỗi chi tiết ra để xem
+    }
   }
 
   //-----------------------------------------
@@ -73,7 +80,7 @@ public class LuuNguyenThanhVu_21130612_Lab7 {
   public void TC_OD_2_CheckFullField() {
     // Wait for the Name field to be visible
     WebElement nameField = wait.until(
-        ExpectedConditions.visibilityOfElementLocated(By.name("name")));
+            ExpectedConditions.visibilityOfElementLocated(By.name("name")));
     nameField.sendKeys("Vũ");
 
     WebElement phoneField = driver.findElement(By.name("phone"));
@@ -106,7 +113,7 @@ public class LuuNguyenThanhVu_21130612_Lab7 {
   public void TC_OD_3_BlankRequiredFields() {
     // Only enter note
     WebElement noteField = wait.until(
-        ExpectedConditions.visibilityOfElementLocated(By.name("note")));
+            ExpectedConditions.visibilityOfElementLocated(By.name("note")));
     noteField.sendKeys("Test blank fields");
 
     // Click submit order button
@@ -114,12 +121,12 @@ public class LuuNguyenThanhVu_21130612_Lab7 {
 
     // Verify Name error message is displayed
     WebElement nameError = wait.until(ExpectedConditions.visibilityOfElementLocated(
-        By.xpath("//*[contains(text(),'Họ tên không để trống')]")
+            By.xpath("//*[contains(text(),'Họ tên không để trống')]")
     ));
 
     // Verify Phone error message is displayed
     WebElement phoneError = driver.findElement(
-        By.xpath("//*[contains(text(),'Số điện thoại không để trống')]")
+            By.xpath("//*[contains(text(),'Số điện thoại không để trống')]")
     );
 
     Assertions.assertTrue(nameError.isDisplayed());
@@ -134,7 +141,7 @@ public class LuuNguyenThanhVu_21130612_Lab7 {
   public void TC_OD_4_InvalidPhone() {
     // Fill Name field
     WebElement nameField = wait.until(
-        ExpectedConditions.visibilityOfElementLocated(By.name("name")));
+            ExpectedConditions.visibilityOfElementLocated(By.name("name")));
     nameField.sendKeys("Vũ Test");
 
     // Fill Phone field with invalid format
@@ -146,7 +153,7 @@ public class LuuNguyenThanhVu_21130612_Lab7 {
 
     // Verify phone error message appears
     WebElement phoneError = wait.until(ExpectedConditions.visibilityOfElementLocated(
-        By.xpath("//*[contains(text(),'Số điện thoại không đúng định dạng')]")
+            By.xpath("//*[contains(text(),'Số điện thoại không đúng định dạng')]")
     ));
     Assertions.assertTrue(phoneError.isDisplayed());
   }
@@ -159,25 +166,25 @@ public class LuuNguyenThanhVu_21130612_Lab7 {
   public void TC_OD_5_DeliveryMethodSwitch() {
     // Select "Home Delivery" option
     WebElement homeOption = wait.until(ExpectedConditions.elementToBeClickable(
-        By.cssSelector(".select_delivery-up > .container_cart:nth-child(1)")
+            By.cssSelector(".select_delivery-up > .container_cart:nth-child(1)")
     ));
     homeOption.click();
 
     // Verify Address section appears
     WebElement addressSection = wait.until(ExpectedConditions.visibilityOfElementLocated(
-        By.name("address")
+            By.name("address")
     ));
     Assertions.assertTrue(addressSection.isDisplayed());
 
     // Select "Pick up at Store" option
     WebElement storeOption = driver.findElement(
-        By.cssSelector(".select_delivery-up > .container_cart:nth-child(2)")
+            By.cssSelector(".select_delivery-up > .container_cart:nth-child(2)")
     );
     storeOption.click();
 
     // Verify store list is displayed
     WebElement storeList = wait.until(ExpectedConditions.visibilityOfElementLocated(
-        By.cssSelector(".go_market, .position_market")
+            By.cssSelector(".go_market, .position_market")
     ));
     Assertions.assertTrue(storeList.isDisplayed());
   }
@@ -189,7 +196,7 @@ public class LuuNguyenThanhVu_21130612_Lab7 {
   public void TC_CO_2_3_ClickOrderButton() {
     // Wait for the Name field to be visible
     WebElement nameField = wait.until(
-        ExpectedConditions.visibilityOfElementLocated(By.name("name")));
+            ExpectedConditions.visibilityOfElementLocated(By.name("name")));
     nameField.sendKeys("Vũ");
 
     WebElement phoneField = driver.findElement(By.name("phone"));
@@ -215,7 +222,7 @@ public class LuuNguyenThanhVu_21130612_Lab7 {
 
     // Click the order button
     WebElement orderButton = wait.until(ExpectedConditions.elementToBeClickable(
-        By.className("btn_submit_book") // assuming this is the button ID
+            By.className("btn_submit_book") // assuming this is the button ID
     ));
     orderButton.click();
   }
