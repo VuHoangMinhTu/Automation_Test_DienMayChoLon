@@ -15,7 +15,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class PhamPhiTruong_21130593_Lab8 {
+public class TestPhamPhiTruong_21130593_Lab8 {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
@@ -51,6 +51,7 @@ public class PhamPhiTruong_21130593_Lab8 {
       builder.moveToElement(element).perform();
     }
     driver.findElement(By.cssSelector("#user_box > a:nth-child(1) > span")).click();
+    Thread.sleep(3000);
     driver.findElement(By.linkText("Sửa")).click();
     driver.findElement(By.name("email")).click();
     driver.findElement(By.name("email")).click();
@@ -135,6 +136,7 @@ public class PhamPhiTruong_21130593_Lab8 {
       builder.moveToElement(element).perform();
     }
     driver.findElement(By.cssSelector("#user_box > a:nth-child(1) > span")).click();
+    Thread.sleep(3000);
     driver.findElement(By.linkText("Sửa")).click();
     driver.findElement(By.name("fullname")).click();
     driver.findElement(By.name("fullname")).clear();

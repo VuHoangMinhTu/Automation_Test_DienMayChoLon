@@ -9,7 +9,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LuuNguyenThanhVu_21130612_Lab8 {
+public class TestLuuNguyenThanhVu_21130612_Lab8 {
 
   // WebDriver instance for interacting with the browser
   private WebDriver driver;
