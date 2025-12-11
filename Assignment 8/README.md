@@ -61,10 +61,11 @@
     </build>
 ```
 ## Bước 3: Chuyển file vào project
-- Theo đường dẫn src/test/java tạo một package 
+- Theo đường dẫn ```src/test/java``` tạo một package 
 - Copy/cut 7 file đưa vào package
 ## Bước 4: Sử dụng maven để chạy lệnh test
 - Mở terminal ở project
 - Chạy lệnh 
 ```mvn -q test```
+
 
