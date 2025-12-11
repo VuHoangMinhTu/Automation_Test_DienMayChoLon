@@ -2,37 +2,40 @@
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
-
+import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNot.not;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
-
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.Keys;
 import java.util.*;
-
-public class DefaultSuiteTest {
+import java.net.MalformedURLException;
+import java.net.URL;
+public class DefaultSuiteTesst {
     private WebDriver driver;
     private Map<String, Object> vars;
     JavascriptExecutor js;
-
     @Before
     public void setUp() {
         driver = new FirefoxDriver();
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
     }
-
     @After
     public void tearDown() {
         driver.quit();
     }
-
-    // Dùng cho các pop-up window
     public String waitForWindow(int timeout) {
         try {
             Thread.sleep(timeout);
@@ -46,7 +49,6 @@ public class DefaultSuiteTest {
         }
         return whNow.iterator().next();
     }
-
     // Hàm click kèm delay sau mỗi thao tác
     private void clickWithDelay(By locator, int delayMs) {
         driver.findElement(locator).click();
@@ -56,36 +58,39 @@ public class DefaultSuiteTest {
             e.printStackTrace();
         }
     }
-
     @Test
     public void productInfo() {
         driver.get("https://dienmaycholon.com/");
-        driver.manage().window().setSize(new Dimension(1836, 948));
-
-        clickWithDelay(By.cssSelector(".owl-item:nth-child(2) > .product_main_so_suat > .product:nth-child(1) .name_pro span"), 1000);
-        clickWithDelay(By.cssSelector("#sync3 .owl-next"), 1000);
-        clickWithDelay(By.cssSelector("#sync3 .owl-next"), 1000);
-        clickWithDelay(By.cssSelector(".fa-cube"), 1000);
-        clickWithDelay(By.cssSelector(".tab-item"), 1000);
-        clickWithDelay(By.cssSelector(".info_pro-title li:nth-child(2)"), 1000);
-        clickWithDelay(By.cssSelector(".info_pro-title li:nth-child(4)"), 1000);
-        clickWithDelay(By.cssSelector(".btn-closemenu"), 1000);
-        clickWithDelay(By.cssSelector("#slide_pro .owl-next"), 1000);
-        clickWithDelay(By.cssSelector(".owl-item:nth-child(3) .name_pro > .name_pro > span"), 1000);
-
-        js.executeScript("window.scrollTo(0,1672)");
-        clickWithDelay(By.cssSelector(".info_pro-title li:nth-child(3)"), 1000);
-        clickWithDelay(By.cssSelector(".info_pro-title li:nth-child(4)"), 1000);
-
+        driver.manage().window().setSize(new Dimension(1836, 963));
+        clickWithDelay(By.cssSelector("input"), 2000);
+        {
+            WebElement element = driver.findElement(By.cssSelector(".button_search"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        {
+            WebElement element = driver.findElement(By.tagName("body"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element, 0, 0).perform();
+        }
+        driver.findElement(By.cssSelector("input")).sendKeys("Tủ Lạnh Hitachi Inverter 339 Lít R-FVX450PGV9 GBK");
+        clickWithDelay(By.cssSelector(".button_search > svg"), 2000);
+        clickWithDelay(By.cssSelector(".product:nth-child(1) .name_pro > .name_pro"), 2000);
+        clickWithDelay(By.cssSelector(".owl-item:nth-child(1) > .dmcl-gallery"), 2000);
+        clickWithDelay(By.cssSelector("#slide_popup-img-big .owl-next"), 2000);
+        clickWithDelay(By.cssSelector(".btn-closemenu"), 2000);
+        clickWithDelay(By.cssSelector(".fa-cube"), 2000);
+        clickWithDelay(By.cssSelector(".btn-closemenu"), 2000);
+        clickWithDelay(By.cssSelector(".fa-info-circle"), 2000);
+        clickWithDelay(By.cssSelector(".btn-closemenu"), 2000);
+        clickWithDelay(By.cssSelector("#slide_pro .owl-next"), 2000);
+        clickWithDelay(By.cssSelector(".owl-item:nth-child(2) .name_pro > .name_pro > span"), 2000);
+        clickWithDelay(By.cssSelector(".fa-pen-square"), 2000);
         vars.put("window_handles", driver.getWindowHandles());
-        clickWithDelay(By.cssSelector(".comment-btn__item > span"), 1000);
-
-        vars.put("win5543", waitForWindow(2000));
-        driver.switchTo().window(vars.get("win5543").toString());
-
-        js.executeScript("window.scrollTo(0,137)");
-        js.executeScript("window.scrollTo(0,510)");
-
+        clickWithDelay(By.cssSelector(".comment-btn__item > span"), 2000);
+        vars.put("win6488", waitForWindow(2000));
+        driver.switchTo().window(vars.get("win6488").toString());
+        js.executeScript("window.scrollTo(0,194)");
         {
             WebElement element = driver.findElement(By.cssSelector("html"));
             Actions builder = new Actions(driver);
@@ -102,24 +107,38 @@ public class DefaultSuiteTest {
             builder.moveToElement(element).release().perform();
         }
     }
-
     @Test
     public void cart() {
         driver.get("https://dienmaycholon.com/");
-        driver.manage().window().setSize(new Dimension(1836, 948));
-
-        clickWithDelay(By.cssSelector(".owl-item:nth-child(2) > .product_main_so_suat > .product:nth-child(1) strong"), 1000);
-        clickWithDelay(By.cssSelector(".click_buy"), 1000);
-        clickWithDelay(By.linkText("Quay lại mua thêm sản phẩm khác"), 1000);
-        clickWithDelay(By.cssSelector(".owl-item:nth-child(3) > .product_main_so_suat > .product:nth-child(1) .name_pro strong"), 1000);
-
-        js.executeScript("window.scrollTo(0,294)");
-        clickWithDelay(By.cssSelector(".click_buy"), 1000);
-
-        js.executeScript("window.scrollTo(0,78)");
-        clickWithDelay(By.cssSelector("div:nth-child(3) > .info_pro-cart .icon_trash"), 1000);
-        clickWithDelay(By.cssSelector(".icon_trash"), 1000);
-        clickWithDelay(By.cssSelector(".logo .lazy"), 1000);
-        clickWithDelay(By.cssSelector(".box_cart_new > span"), 1000);
+        driver.manage().window().setSize(new Dimension(1836, 963));
+        clickWithDelay(By.cssSelector(".owl-item:nth-child(2) > .product_main_so_suat > .product:nth-child(1) .name_pro span"), 2000);
+        {
+            WebElement element = driver.findElement(By.cssSelector(".click_buy > span"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        {
+            WebElement element = driver.findElement(By.tagName("body"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element, 0, 0).perform();
+        }
+        clickWithDelay(By.cssSelector(".click_buy"), 2000);
+        {
+            WebElement element = driver.findElement(By.linkText("Quay lại mua thêm sản phẩm khác"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        clickWithDelay(By.linkText("Quay lại mua thêm sản phẩm khác"), 2000);
+        clickWithDelay(By.cssSelector(".owl-item:nth-child(3) > .product_main_so_suat > .product:nth-child(1) .name_pro span"), 2000);
+        clickWithDelay(By.cssSelector(".click_buy"), 2000);
+        {
+            WebElement element = driver.findElement(By.linkText("Quay lại mua thêm sản phẩm khác"));
+            Actions builder = new Actions(driver);
+            builder.moveToElement(element).perform();
+        }
+        clickWithDelay(By.cssSelector("div:nth-child(2) > .info_pro-cart .remove_pro_cart > span"), 2000);
+        clickWithDelay(By.cssSelector(".icon_trash"), 2000);
+        clickWithDelay(By.cssSelector(".logo .lazy"), 2000);
+        clickWithDelay(By.cssSelector(".box_cart_new > span"), 2000);
     }
 }
