@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class NguyenThaiToan_21130569_Lab8 {
+public class TestNguyenThaiToan_21130569_Lab8 {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;

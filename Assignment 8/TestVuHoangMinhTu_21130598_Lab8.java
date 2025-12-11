@@ -13,7 +13,7 @@ import java.util.Map;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class VuHoangMinhTu_21130598_Lab8 {
+public class TestVuHoangMinhTu_21130598_Lab8 {
     private WebDriver driver;
     private Map<String, Object> vars;
     JavascriptExecutor js;
