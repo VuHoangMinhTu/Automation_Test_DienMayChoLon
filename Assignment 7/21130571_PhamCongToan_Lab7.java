@@ -110,19 +110,54 @@ public class update_21130571_PhamCongToan_Lab7 {
     driver.get("https://dienmaycholon.com/");
     driver.manage().window().setSize(new Dimension(1711, 922));
     clickWithDelay(By.cssSelector("input"), 2000);
+    {
+      WebElement element = driver.findElement(By.cssSelector(".button_search"));
+      Actions builder = new Actions(driver);
+      builder.moveToElement(element).perform();
+    }
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    {
+      WebElement element = driver.findElement(By.tagName("body"));
+      Actions builder = new Actions(driver);
+      builder.moveToElement(element, 0, 0).perform();
+    }
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    {
+      WebElement element = driver.findElement(By.cssSelector(".button_search"));
+      Actions builder = new Actions(driver);
+      builder.moveToElement(element).perform();
+    }
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    {
+      WebElement element = driver.findElement(By.tagName("body"));
+      Actions builder = new Actions(driver);
+      builder.moveToElement(element, 0, 0).perform();
+    }
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     driver.findElement(By.cssSelector("input")).sendKeys("Tủ Lạnh Hitachi Inverter 339 Lít R-FVX450PGV9 GBK");
     try {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-    driver.findElement(By.cssSelector("input")).sendKeys(Keys.ENTER);
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    clickWithDelay(By.cssSelector(".product:nth-child(1) .name_pro > .name_pro"), 2000);
+    clickWithDelay(By.cssSelector(".button_search > svg"), 2000);
+    clickWithDelay(By.cssSelector(".product:nth-child(1) .name_pro > .name_pro > span"), 2000);
   }
   @Test
   public void TC_PI_3() {
