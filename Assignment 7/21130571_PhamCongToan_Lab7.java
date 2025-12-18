@@ -15,7 +15,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import java.util.*;
 
-public class update_21130571_PhamCongToan_Lab7 {
+public class TestPhamCongToan_21130571_Lab8 {
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
@@ -105,84 +105,10 @@ public class update_21130571_PhamCongToan_Lab7 {
     clickWithDelay(By.cssSelector(".button_search > svg"), 2000);
     clickWithDelay(By.cssSelector(".product:nth-child(1) .name_pro > .name_pro > span"), 2000);
   }
+
+
   @Test
   public void TC_PI_2() {
-    driver.get("https://dienmaycholon.com/");
-    driver.manage().window().setSize(new Dimension(1711, 922));
-    clickWithDelay(By.cssSelector("input"), 2000);
-    {
-      WebElement element = driver.findElement(By.cssSelector(".button_search"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).perform();
-    }
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    {
-      WebElement element = driver.findElement(By.tagName("body"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element, 0, 0).perform();
-    }
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    {
-      WebElement element = driver.findElement(By.cssSelector(".button_search"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).perform();
-    }
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    {
-      WebElement element = driver.findElement(By.tagName("body"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element, 0, 0).perform();
-    }
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    driver.findElement(By.cssSelector("input")).sendKeys("Tủ Lạnh Hitachi Inverter 339 Lít R-FVX450PGV9 GBK");
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    clickWithDelay(By.cssSelector(".button_search > svg"), 2000);
-    clickWithDelay(By.cssSelector(".product:nth-child(1) .name_pro > .name_pro > span"), 2000);
-  }
-  @Test
-  public void TC_PI_3() {
-    driver.get("https://dienmaycholon.com/");
-    driver.manage().window().setSize(new Dimension(1711, 922));
-    clickWithDelay(By.cssSelector("input"), 2000);
-    driver.findElement(By.cssSelector("input")).sendKeys("Tủ Lạnh Hitachi Inverter 339 Lít R-FVX450PGV9 GBK");
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    driver.findElement(By.cssSelector("input")).sendKeys(Keys.ENTER);
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    clickWithDelay(By.cssSelector(".product:nth-child(1) .name_pro > .name_pro > span"), 2000);
-    clickWithDelay(By.cssSelector(".dmcl-gallery > .loaded"), 2000);
-    clickWithDelay(By.cssSelector("#slide_popup-img-big .owl-next"), 2000);
-    clickWithDelay(By.cssSelector("#slide_popup-img-big .owl-next"), 2000);
-  }
-  @Test
-  public void TC_PI_4() {
     driver.get("https://dienmaycholon.com/");
     driver.manage().window().setSize(new Dimension(1711, 922));
     clickWithDelay(By.cssSelector("input"), 2000);
@@ -215,7 +141,7 @@ public class update_21130571_PhamCongToan_Lab7 {
     clickWithDelay(By.cssSelector(".btn-closemenu"), 2000);
   }
   @Test
-  public void TC_PI_5() {
+  public void TC_PI_3() {
     driver.get("https://dienmaycholon.com/");
     driver.manage().window().setSize(new Dimension(1711, 928));
     clickWithDelay(By.cssSelector("input"), 2000);
@@ -246,7 +172,7 @@ public class update_21130571_PhamCongToan_Lab7 {
     clickWithDelay(By.cssSelector(".owl-item:nth-child(3) .name_pro > .name_pro > span"), 2000);
   }
   @Test
-  public void TC_PI_6() {
+  public void TC_PI_4() {
     driver.get("https://dienmaycholon.com/");
     driver.manage().window().setSize(new Dimension(1711, 922));
     clickWithDelay(By.cssSelector("input"), 2000);
@@ -367,65 +293,9 @@ public class update_21130571_PhamCongToan_Lab7 {
     }
     clickWithDelay(By.cssSelector(".icon_trash"), 2000);
   }
+
   @Test
   public void TC_Cart_2() {
-    driver.get("https://dienmaycholon.com/");
-    driver.manage().window().setSize(new Dimension(1711, 928));
-    clickWithDelay(By.cssSelector("input"), 2000);
-    driver.findElement(By.cssSelector("input")).sendKeys("Tủ Lạnh Hitachi Inverter 339 Lít R-FVX450PGV9 GBK");
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    driver.findElement(By.cssSelector("input")).sendKeys(Keys.ENTER);
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    clickWithDelay(By.cssSelector(".product:nth-child(1) .name_pro > .name_pro"), 2000);
-    js.executeScript("window.scrollTo(0,99)");
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    clickWithDelay(By.cssSelector(".click_buy"), 2000);
-    {
-      WebElement element = driver.findElement(By.cssSelector("html"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).clickAndHold().perform();
-    }
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    {
-      WebElement element = driver.findElement(By.cssSelector("html"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).perform();
-    }
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    {
-      WebElement element = driver.findElement(By.cssSelector("html"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).release().perform();
-    }
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    clickWithDelay(By.cssSelector(".icon_trash"), 2000);
-  }
-  @Test
-  public void TC_Cart_3() {
     driver.get("https://dienmaycholon.com/");
     driver.manage().window().setSize(new Dimension(1711, 928));
     clickWithDelay(By.cssSelector("input"), 2000);
@@ -484,7 +354,7 @@ public class update_21130571_PhamCongToan_Lab7 {
     clickWithDelay(By.cssSelector(".icon_trash"), 2000);
   }
   @Test
-  public void TC_Cart_4() {
+  public void TC_Cart_3() {
     driver.get("https://dienmaycholon.com/");
     driver.manage().window().setSize(new Dimension(1711, 928));
     clickWithDelay(By.cssSelector("input"), 3000);
@@ -555,62 +425,6 @@ public class update_21130571_PhamCongToan_Lab7 {
     clickWithDelay(By.cssSelector("div:nth-child(3) .remove_pro_cart > span"), 3000);
     clickWithDelay(By.cssSelector(".remove_pro_cart > span"), 3000);
   }
-  @Test
-  public void TC_Cart_5() {
-    driver.get("https://dienmaycholon.com/");
-    driver.manage().window().setSize(new Dimension(1711, 926));
-    clickWithDelay(By.cssSelector(".box_cart_new"), 2000);
-    clickWithDelay(By.linkText("Mua sắm"), 2000);
-  }
-  @Test
-  public void TC_Cart_6() {
-    driver.get("https://dienmaycholon.com/");
-    driver.manage().window().setSize(new Dimension(1711, 929));
-    clickWithDelay(By.cssSelector("input"), 2000);
-    driver.findElement(By.cssSelector("input")).sendKeys("Tủ Lạnh Hitachi Inverter 339 Lít R-FVX450PGV9 GBK");
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    driver.findElement(By.cssSelector("input")).sendKeys(Keys.ENTER);
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    clickWithDelay(By.cssSelector(".product:nth-child(1) .name_pro > .name_pro > span"), 2000);
-    clickWithDelay(By.cssSelector(".click_buy > span"), 2000);
-    clickWithDelay(By.cssSelector(".box_cart_new"), 2000);
-    clickWithDelay(By.cssSelector(".icon_trash"), 2000);
-  }
-  @Test
-  public void TC_Cart_7() {
-    driver.get("https://dienmaycholon.com/");
-    driver.manage().window().setSize(new Dimension(1711, 929));
-    clickWithDelay(By.cssSelector("input"), 2000);
-    driver.findElement(By.cssSelector("input")).sendKeys("Tủ Lạnh Hitachi Inverter 339 Lít R-FVX450PGV9 GBK");
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    driver.findElement(By.cssSelector("input")).sendKeys(Keys.ENTER);
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    clickWithDelay(By.cssSelector(".product:nth-child(1) .name_pro > .name_pro > span"), 2000);
-    js.executeScript("window.scrollTo(0,303)");
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    clickWithDelay(By.cssSelector(".click_buy"), 2000);
-    clickWithDelay(By.linkText("Quay lại mua thêm sản phẩm khác"), 2000);
-    clickWithDelay(By.cssSelector(".box_cart_new"), 2000);
-    clickWithDelay(By.cssSelector(".remove_pro_cart > span"), 2000);
-  }
+
+
 }
