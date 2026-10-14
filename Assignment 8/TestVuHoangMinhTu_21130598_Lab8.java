@@ -176,8 +176,8 @@ public class VuHoangMinhTu_21130598_Lab8 {
         // Click nút đăng ký bằng JS
         clickByJS("#user_box .icon_register");
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("username"))).sendKeys("toiyeu11nguoi2003");
-        driver.findElement(By.id("email")).sendKeys("toiyeu11nguoi2003@gmail.com");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("username"))).sendKeys("toiyeu12nguoi2003");
+        driver.findElement(By.id("email")).sendKeys("toiyeu12nguoi2003@gmail.com");
         driver.findElement(By.id("password")).sendKeys("Minhtu2003");
         driver.findElement(By.id("repassword")).sendKeys("Minhtu2003");
         driver.findElement(By.name("fullname")).sendKeys("Minh Tú");
